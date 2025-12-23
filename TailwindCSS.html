@@ -1,0 +1,821 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tailwind CSS - btsoft</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .slide {
+            display: none;
+            animation: fadeIn 0.5s;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .code-demo {
+            background: #1e293b;
+            color: #e2e8f0;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            overflow-x: auto;
+        }
+
+        .comparison-box {
+            transition: transform 0.3s;
+        }
+
+        .comparison-box:hover {
+            transform: scale(1.05);
+        }
+
+        .nav-btn.active {
+            background-color: #3b82f6;
+            color: white;
+        }
+    </style>
+</head>
+
+<body class="bg-gradient-to-br from-blue-50 to-indigo-100 min-h-screen">
+    <!-- Navigation Controls -->
+    <div class="fixed top-4 right-4 z-50 flex gap-2">
+        <button onclick="prevSlide()"
+            class="bg-white hover:bg-gray-100 text-gray-800 font-semibold py-2 px-4 rounded-lg shadow transition duration-300">
+            ← Previous
+        </button>
+        <button onclick="nextSlide()"
+            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-lg shadow transition duration-300">
+            Next →
+        </button>
+    </div>
+
+    <!-- Slide Indicator -->
+    <div class="fixed top-4 left-4 z-50 bg-white rounded-lg shadow px-4 py-2">
+        <span class="text-gray-600 font-semibold">Slide <span id="currentSlide">1</span> / <span
+                id="totalSlides">12</span></span>
+    </div>
+
+    <!-- Quick Navigation -->
+    <div
+        class="fixed bottom-4 left-1/2 transform -translate-x-1/2 z-50 bg-white rounded-lg shadow-lg p-2 flex gap-1 overflow-x-auto max-w-[90vw]">
+        <button onclick="showSlide(1)"
+            class="nav-btn px-3 py-1 rounded text-xs bg-gray-100 hover:bg-blue-100">1</button>
+        <button onclick="showSlide(2)"
+            class="nav-btn px-3 py-1 rounded text-xs bg-gray-100 hover:bg-blue-100">2</button>
+        <button onclick="showSlide(3)"
+            class="nav-btn px-3 py-1 rounded text-xs bg-gray-100 hover:bg-blue-100">3</button>
+        <button onclick="showSlide(4)"
+            class="nav-btn px-3 py-1 rounded text-xs bg-gray-100 hover:bg-blue-100">4</button>
+        <button onclick="showSlide(5)"
+            class="nav-btn px-3 py-1 rounded text-xs bg-gray-100 hover:bg-blue-100">5</button>
+        <button onclick="showSlide(6)"
+            class="nav-btn px-3 py-1 rounded text-xs bg-gray-100 hover:bg-blue-100">6</button>
+        <button onclick="showSlide(7)"
+            class="nav-btn px-3 py-1 rounded text-xs bg-gray-100 hover:bg-blue-100">7</button>
+        <button onclick="showSlide(8)"
+            class="nav-btn px-3 py-1 rounded text-xs bg-gray-100 hover:bg-blue-100">8</button>
+        <button onclick="showSlide(9)"
+            class="nav-btn px-3 py-1 rounded text-xs bg-gray-100 hover:bg-blue-100">9</button>
+        <button onclick="showSlide(10)"
+            class="nav-btn px-3 py-1 rounded text-xs bg-gray-100 hover:bg-blue-100">10</button>
+        <button onclick="showSlide(11)"
+            class="nav-btn px-3 py-1 rounded text-xs bg-gray-100 hover:bg-blue-100">11</button>
+        <button onclick="showSlide(12)"
+            class="nav-btn px-3 py-1 rounded text-xs bg-gray-100 hover:bg-blue-100">12</button>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container mx-auto px-4 py-8 max-w-5xl pt-20">
+        <!-- Slide 1: Cover -->
+        <div class="slide active">
+            <div class="bg-white rounded-2xl shadow-2xl p-12 text-center min-h-[80vh] flex flex-col justify-center">
+                <div class="mb-8">
+                    <svg class="w-32 h-32 mx-auto text-blue-600" fill="currentColor" viewBox="0 0 54 33">
+                        <path
+                            d="M13.5 22.1c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05zM0 33c1.8-7.2 6.3-10.8 13.5-10.8 10.8 0 12.15 8.1 17.55 9.45 3.6.9 6.75-.45 9.45-4.05-1.8 7.2-6.3 10.8-13.5 10.8-10.8 0-12.15-8.1-17.55-9.45-3.6-.9-6.75.45-9.45 4.05z" />
+                    </svg>
+                </div>
+                <h1 class="text-5xl font-bold text-gray-900 mb-4">Tailwind CSS</h1>
+                <p class="text-2xl text-gray-600 mb-8">Utility-first framework for rapid web development</p>
+                <div class="flex justify-center gap-4">
+                    <span
+                        class="bg-blue-100 text-blue-800 px-4 py-2 rounded-full text-sm font-semibold">Utility-First</span>
+                    <span
+                        class="bg-green-100 text-green-800 px-4 py-2 rounded-full text-sm font-semibold">Responsive</span>
+                    <span
+                        class="bg-purple-100 text-purple-800 px-4 py-2 rounded-full text-sm font-semibold">Customizable</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 2: Introduction -->
+        <div class="slide">
+            <div class="bg-white rounded-2xl shadow-2xl p-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-8">What is Tailwind CSS?</h2>
+
+                <div class="grid md:grid-cols-2 gap-8 mb-8">
+                    <div class="comparison-box bg-red-50 border-2 border-red-200 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-red-800 mb-4">❌ Traditional CSS</h3>
+                        <div class="code-demo text-xs">
+                            .card {
+                            background: white;
+                            padding: 1.5rem;
+                            border-radius: 0.5rem;
+                            box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+                            }
+
+                            .card-title {
+                            font-size: 1.25rem;
+                            font-weight: bold;
+                            color: #1f2937;
+                            }
+                        </div>
+                    </div>
+
+                    <div class="comparison-box bg-green-50 border-2 border-green-200 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-green-800 mb-4">✅ Tailwind CSS</h3>
+                        <div class="code-demo text-xs">
+                            &lt;div class="bg-white p-6 rounded-lg shadow-md"&gt;
+                            &lt;h2 class="text-xl font-bold text-gray-800"&gt;
+                            Title
+                            &lt;/h2&gt;
+                            &lt;/div&gt;
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6">
+                    <h3 class="text-2xl font-bold text-gray-900 mb-4">Main advantages:</h3>
+                    <ul class="space-y-3 text-gray-700">
+                        <li class="flex items-start">
+                            <span class="text-blue-600 font-bold mr-3">⚡</span>
+                            <span><strong>Fast development:</strong> Styles directly in HTML without switching
+                                files</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-green-600 font-bold mr-3">🎯</span>
+                            <span><strong>Consistency:</strong> Integrated design system with predefined spacing and
+                                colors</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-purple-600 font-bold mr-3">🎨</span>
+                            <span><strong>Customization:</strong> Fully configurable via tailwind.config.js</span>
+                        </li>
+                        <li class="flex items-start">
+                            <span class="text-orange-600 font-bold mr-3">📦</span>
+                            <span><strong>Optimized size:</strong> Only includes classes you use in production</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 3: Common Classes Overview -->
+        <div class="slide">
+            <div class="bg-white rounded-2xl shadow-2xl p-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-8">Commonly Used Classes</h2>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-blue-50 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-blue-800 mb-4">📏 Layout</h3>
+                        <div class="space-y-2 text-sm">
+                            <div><code class="bg-white px-2 py-1 rounded">flex</code> - Flexbox container</div>
+                            <div><code class="bg-white px-2 py-1 rounded">grid</code> - Grid container</div>
+                            <div><code class="bg-white px-2 py-1 rounded">container</code> - Centered container</div>
+                            <div><code class="bg-white px-2 py-1 rounded">mx-auto</code> - Center horizontally</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-green-800 mb-4">🎨 Colors</h3>
+                        <div class="space-y-2 text-sm">
+                            <div><code class="bg-white px-2 py-1 rounded">bg-blue-500</code> - Background color</div>
+                            <div><code class="bg-white px-2 py-1 rounded">text-gray-800</code> - Text color</div>
+                            <div><code class="bg-white px-2 py-1 rounded">border-red-300</code> - Border color</div>
+                            <div><code class="bg-white px-2 py-1 rounded">hover:bg-blue-600</code> - Hover state</div>
+                        </div>
+                    </div>
+
+                    <div class="bg-purple-50 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-purple-800 mb-4">✨ Effects</h3>
+                        <div class="space-y-2 text-sm">
+                            <div><code class="bg-white px-2 py-1 rounded">shadow-lg</code> - Large shadow</div>
+                            <div><code class="bg-white px-2 py-1 rounded">rounded-lg</code> - Rounded corners</div>
+                            <div><code class="bg-white px-2 py-1 rounded">transition</code> - CSS transitions</div>
+                            <div><code class="bg-white px-2 py-1 rounded">transform</code> - CSS transforms</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 bg-gradient-to-r from-gray-50 to-gray-100 rounded-xl p-6">
+                    <h3 class="text-xl font-bold text-gray-900 mb-4">Real-world example:</h3>
+                    <div class="code-demo text-xs">
+                        &lt;button class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-6 rounded-lg
+                        shadow transition"&gt;
+                        Click me
+                        &lt;/button&gt;
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 4: Flexbox Classes (from your presentation) -->
+        <div class="slide">
+            <div class="bg-white rounded-2xl shadow-2xl p-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-8">Flexbox Classes</h2>
+
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-800 mb-3">Display Flex</h3>
+                        <div class="bg-white border border-gray-200 p-4 rounded-lg mb-4">
+                            <div class="flex gap-2 bg-blue-100 p-4 rounded">
+                                <div class="bg-blue-500 text-white p-3 rounded">1</div>
+                                <div class="bg-blue-500 text-white p-3 rounded">2</div>
+                                <div class="bg-blue-500 text-white p-3 rounded">3</div>
+                            </div>
+                            <code class="text-sm text-gray-600 mt-2 block">class="flex gap-2"</code>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-green-800 mb-3">Justify Content</h3>
+                        <div class="grid md:grid-cols-3 gap-4 mb-4">
+                            <div class="bg-white border border-gray-200 p-3 rounded">
+                                <div class="flex justify-start gap-2 bg-green-100 p-3 rounded mb-2">
+                                    <div class="bg-green-500 text-white px-3 py-1 rounded">A</div>
+                                    <div class="bg-green-500 text-white px-3 py-1 rounded">B</div>
+                                </div>
+                                <code class="text-xs text-gray-600">justify-start</code>
+                            </div>
+
+                            <div class="bg-white border border-gray-200 p-3 rounded">
+                                <div class="flex justify-center gap-2 bg-green-100 p-3 rounded mb-2">
+                                    <div class="bg-green-500 text-white px-3 py-1 rounded">A</div>
+                                    <div class="bg-green-500 text-white px-3 py-1 rounded">B</div>
+                                </div>
+                                <code class="text-xs text-gray-600">justify-center</code>
+                            </div>
+
+                            <div class="bg-white border border-gray-200 p-3 rounded">
+                                <div class="flex justify-between gap-2 bg-green-100 p-3 rounded mb-2">
+                                    <div class="bg-green-500 text-white px-3 py-1 rounded">A</div>
+                                    <div class="bg-green-500 text-white px-3 py-1 rounded">B</div>
+                                </div>
+                                <code class="text-xs text-gray-600">justify-between</code>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-purple-800 mb-3">Align Items</h3>
+                        <div class="bg-white border border-gray-200 p-4 rounded-lg">
+                            <div class="grid md:grid-cols-3 gap-3">
+                                <div class="bg-purple-100 p-2 rounded">
+                                    <div class="flex items-start gap-2 h-20 bg-purple-200 rounded p-2">
+                                        <div class="bg-purple-500 text-white px-2 py-1 rounded text-xs">1</div>
+                                        <div class="bg-purple-500 text-white px-2 py-1 rounded text-xs">2</div>
+                                    </div>
+                                    <code class="text-xs text-gray-600 mt-1 block">items-start</code>
+                                </div>
+
+                                <div class="bg-purple-100 p-2 rounded">
+                                    <div class="flex items-center gap-2 h-20 bg-purple-200 rounded p-2">
+                                        <div class="bg-purple-500 text-white px-2 py-1 rounded text-xs">1</div>
+                                        <div class="bg-purple-500 text-white px-2 py-1 rounded text-xs">2</div>
+                                    </div>
+                                    <code class="text-xs text-gray-600 mt-1 block">items-center</code>
+                                </div>
+
+                                <div class="bg-purple-100 p-2 rounded">
+                                    <div class="flex items-end gap-2 h-20 bg-purple-200 rounded p-2">
+                                        <div class="bg-purple-500 text-white px-2 py-1 rounded text-xs">1</div>
+                                        <div class="bg-purple-500 text-white px-2 py-1 rounded text-xs">2</div>
+                                    </div>
+                                    <code class="text-xs text-gray-600 mt-1 block">items-end</code>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 5: Spacing and Typography -->
+        <div class="slide">
+            <div class="bg-white rounded-2xl shadow-2xl p-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-8">Spacing & Typography</h2>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-orange-50 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-orange-900 mb-4">Margin & Padding</h3>
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between bg-white p-3 rounded border">
+                                <code class="text-blue-600">m-4</code>
+                                <span class="text-gray-600">margin: 1rem</span>
+                            </div>
+                            <div class="flex items-center justify-between bg-white p-3 rounded border">
+                                <code class="text-blue-600">p-6</code>
+                                <span class="text-gray-600">padding: 1.5rem</span>
+                            </div>
+                            <div class="flex items-center justify-between bg-white p-3 rounded border">
+                                <code class="text-blue-600">mx-auto</code>
+                                <span class="text-gray-600">margin: 0 auto</span>
+                            </div>
+                            <div class="flex items-center justify-between bg-white p-3 rounded border">
+                                <code class="text-blue-600">gap-4</code>
+                                <span class="text-gray-600">gap: 1rem</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-indigo-50 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-indigo-900 mb-4">Typography</h3>
+                        <div class="space-y-4 bg-white rounded-lg p-4">
+                            <div class="text-xs text-gray-500">text-xs</div>
+                            <div class="text-sm text-gray-600">text-sm</div>
+                            <div class="text-base text-gray-700">text-base (default)</div>
+                            <div class="text-lg text-gray-800">text-lg</div>
+                            <div class="text-xl font-semibold text-gray-900">text-xl font-semibold</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 6: Visual Effects (from your presentation) -->
+        <div class="slide">
+            <div class="bg-white rounded-2xl shadow-2xl p-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-8">Visual Effects</h2>
+
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-purple-800 mb-3">Shadows (shadow)</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+                            <div class="bg-white border border-gray-200 p-4 rounded-lg shadow-sm text-center">
+                                <div class="text-lg font-bold mb-2">shadow-sm</div>
+                                <div class="text-xs text-gray-500">Small shadow</div>
+                            </div>
+                            <div class="bg-white border border-gray-200 p-4 rounded-lg shadow text-center">
+                                <div class="text-lg font-bold mb-2">shadow</div>
+                                <div class="text-xs text-gray-500">Regular shadow</div>
+                            </div>
+                            <div class="bg-white border border-gray-200 p-4 rounded-lg shadow-lg text-center">
+                                <div class="text-lg font-bold mb-2">shadow-lg</div>
+                                <div class="text-xs text-gray-500">Large shadow</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-800 mb-3">Gradients</h3>
+                        <div class="grid md:grid-cols-2 gap-4 mb-6">
+                            <div
+                                class="bg-gradient-to-r from-purple-500 to-pink-500 p-6 rounded-lg text-white text-center">
+                                bg-gradient-to-r<br>from-purple to-pink
+                            </div>
+                            <div
+                                class="bg-gradient-to-br from-green-400 to-blue-500 p-6 rounded-lg text-white text-center">
+                                bg-gradient-to-br<br>from-green to-blue
+                            </div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-green-800 mb-3">Filters and Opacity</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-3">
+                            <div class="bg-red-500 opacity-100 text-white p-3 rounded text-center">opacity-100</div>
+                            <div class="bg-red-500 opacity-50 text-white p-3 rounded text-center">opacity-50</div>
+                            <div class="bg-blue-500 p-3 rounded text-center relative">
+                                <img src="https://via.placeholder.com/100/0000FF/FFFFFF?text=Img"
+                                    class="w-full rounded grayscale">
+                                <div class="text-xs mt-1">grayscale</div>
+                            </div>
+                            <div class="bg-blue-500 p-3 rounded text-center relative">
+                                <img src="https://via.placeholder.com/100/0000FF/FFFFFF?text=Img"
+                                    class="w-full rounded blur-sm">
+                                <div class="text-xs mt-1">blur-sm</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 7: Interactive States (from your presentation) -->
+        <div class="slide">
+            <div class="bg-white rounded-2xl shadow-2xl p-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-8">Interactive States</h2>
+
+                <div class="space-y-8">
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-800 mb-3">Hover States</h3>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <button
+                                class="bg-blue-500 hover:bg-blue-700 text-white p-4 rounded-lg transition-all duration-300 transform hover:scale-105">
+                                hover:bg-blue-700
+                            </button>
+                            <button
+                                class="bg-green-500 hover:shadow-2xl text-white p-4 rounded-lg transition-all duration-300">
+                                hover:shadow-2xl
+                            </button>
+                            <button
+                                class="bg-purple-500 hover:-translate-y-1 text-white p-4 rounded-lg transition-all duration-300">
+                                hover:-translate-y-1
+                            </button>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-green-800 mb-3">Focus States</h3>
+                        <div class="space-y-3">
+                            <input type="text" placeholder="focus:ring-2 focus:ring-blue-500"
+                                class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent transition">
+                            <input type="text" placeholder="focus:border-green-500"
+                                class="w-full px-4 py-3 border-2 border-gray-300 rounded-lg focus:outline-none focus:border-green-500 transition">
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-red-800 mb-3">Active States (click and hold)</h3>
+                        <div class="grid md:grid-cols-3 gap-4">
+                            <button class="bg-red-500 active:bg-red-700 text-white p-4 rounded-lg transition">
+                                active:bg-red-700
+                            </button>
+                            <button
+                                class="bg-orange-500 active:scale-95 text-white p-4 rounded-lg transition transform">
+                                active:scale-95
+                            </button>
+                            <button class="bg-pink-500 active:shadow-inner text-white p-4 rounded-lg transition">
+                                active:shadow-inner
+                            </button>
+                        </div>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-lg">
+                        <h3 class="font-bold text-gray-800 mb-2">Complete Example:</h3>
+                        <div class="code-demo text-xs">
+                            &lt;button class="
+                            bg-blue-600 hover:bg-blue-700
+                            active:bg-blue-800
+                            focus:outline-none focus:ring-2 focus:ring-blue-500
+                            text-white px-4 py-2 rounded-lg
+                            transition duration-300
+                            transform hover:scale-105 active:scale-95"&gt;
+                            Interactive Button
+                            &lt;/button&gt;
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 8: Borders & Corners -->
+        <div class="slide">
+            <div class="bg-white rounded-2xl shadow-2xl p-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-8">Borders & Corners</h2>
+
+                <div class="space-y-6">
+                    <div>
+                        <h3 class="text-xl font-bold text-blue-800 mb-3">Border Radius</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-6">
+                            <div class="bg-blue-500 p-6 text-white text-center rounded-none">rounded-none</div>
+                            <div class="bg-blue-500 p-6 text-white text-center rounded">rounded</div>
+                            <div class="bg-blue-500 p-6 text-white text-center rounded-lg">rounded-lg</div>
+                            <div class="bg-blue-500 p-6 text-white text-center rounded-full">rounded-full</div>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 class="text-xl font-bold text-green-800 mb-3">Border Width</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+                            <div class="bg-white border border-green-500 p-4 rounded text-center text-gray-800">border
+                            </div>
+                            <div class="bg-white border-2 border-green-500 p-4 rounded text-center text-gray-800">
+                                border-2</div>
+                            <div class="bg-white border-4 border-green-500 p-4 rounded text-center text-gray-800">
+                                border-4</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 9: Example: Modern Button -->
+        <div class="slide">
+            <div class="bg-white rounded-2xl shadow-2xl p-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-8">Example: Modern Button</h2>
+
+                <div class="space-y-8">
+                    <div class="bg-gray-50 rounded-xl p-6">
+                        <h3 class="text-xl font-bold text-gray-800 mb-4">Step by step:</h3>
+                        <ol class="space-y-3 text-gray-700">
+                            <li><strong>1.</strong> Base: <code
+                                    class="bg-white px-2 py-1 rounded text-blue-600">bg-blue-600 text-white</code></li>
+                            <li><strong>2.</strong> Spacing: <code
+                                    class="bg-white px-2 py-1 rounded text-blue-600">py-3 px-6</code></li>
+                            <li><strong>3.</strong> Corners: <code
+                                    class="bg-white px-2 py-1 rounded text-blue-600">rounded-lg</code></li>
+                            <li><strong>4.</strong> Shadow: <code
+                                    class="bg-white px-2 py-1 rounded text-blue-600">shadow</code></li>
+                            <li><strong>5.</strong> Hover: <code
+                                    class="bg-white px-2 py-1 rounded text-blue-600">hover:bg-blue-700</code></li>
+                            <li><strong>6.</strong> Transition: <code
+                                    class="bg-white px-2 py-1 rounded text-blue-600">transition duration-300</code></li>
+                            <li><strong>7.</strong> Typography: <code
+                                    class="bg-white px-2 py-1 rounded text-blue-600">font-semibold</code></li>
+                        </ol>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-8">
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Complete Code:</h3>
+                            <div class="code-demo">
+                                &lt;button class="
+                                bg-blue-600
+                                hover:bg-blue-700
+                                text-white
+                                font-semibold
+                                py-3 px-6
+                                rounded-lg
+                                shadow
+                                transition
+                                duration-300"&gt;
+                                Click here
+                                &lt;/button&gt;
+                            </div>
+                        </div>
+
+                        <div>
+                            <h3 class="text-xl font-bold text-gray-800 mb-4">Result:</h3>
+                            <div class="flex flex-col gap-4">
+                                <button
+                                    class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow transition duration-300">
+                                    Primary Button
+                                </button>
+                                <button
+                                    class="bg-green-600 hover:bg-green-700 text-white font-semibold py-3 px-6 rounded-lg shadow transition duration-300">
+                                    Success Button
+                                </button>
+                                <button
+                                    class="border-2 border-blue-600 text-blue-600 hover:bg-blue-50 font-semibold py-3 px-6 rounded-lg transition duration-300">
+                                    Outline Button
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 10: Responsive Design -->
+        <div class="slide">
+            <div class="bg-white rounded-2xl shadow-2xl p-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-8">Responsive Design</h2>
+
+                <div class="space-y-6">
+                    <div class="bg-blue-50 rounded-xl p-6">
+                        <h3 class="text-2xl font-bold text-blue-900 mb-4">📱 Breakpoints</h3>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-sm bg-white rounded-lg overflow-hidden">
+                                <thead class="bg-blue-100">
+                                    <tr>
+                                        <th class="p-3 text-left">Prefix</th>
+                                        <th class="p-3 text-left">Size</th>
+                                        <th class="p-3 text-left">Example</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="border-b">
+                                        <td class="p-3"><code class="text-blue-600">sm:</code></td>
+                                        <td class="p-3">≥ 640px</td>
+                                        <td class="p-3"><code>sm:text-lg</code></td>
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="p-3"><code class="text-blue-600">md:</code></td>
+                                        <td class="p-3">≥ 768px</td>
+                                        <td class="p-3"><code>md:flex</code></td>
+                                    </tr>
+                                    <tr class="border-b">
+                                        <td class="p-3"><code class="text-blue-600">lg:</code></td>
+                                        <td class="p-3">≥ 1024px</td>
+                                        <td class="p-3"><code>lg:grid-cols-3</code></td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-3"><code class="text-blue-600">xl:</code></td>
+                                        <td class="p-3">≥ 1280px</td>
+                                        <td class="p-3"><code>xl:px-8</code></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="bg-green-50 rounded-xl p-6">
+                        <h3 class="text-2xl font-bold text-green-900 mb-4">Responsive Example</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                            <div
+                                class="bg-gradient-to-br from-blue-400 to-blue-600 p-6 rounded-xl text-white text-center">
+                                <div class="text-2xl mb-2">📱</div>
+                                <div class="text-xs">1 column on mobile</div>
+                            </div>
+                            <div
+                                class="bg-gradient-to-br from-green-400 to-green-600 p-6 rounded-xl text-white text-center">
+                                <div class="text-2xl mb-2">💻</div>
+                                <div class="text-xs">2 on tablet</div>
+                            </div>
+                            <div
+                                class="bg-gradient-to-br from-purple-400 to-purple-600 p-6 rounded-xl text-white text-center">
+                                <div class="text-2xl mb-2">🖥️</div>
+                                <div class="text-xs">4 on desktop</div>
+                            </div>
+                            <div
+                                class="bg-gradient-to-br from-pink-400 to-pink-600 p-6 rounded-xl text-white text-center">
+                                <div class="text-2xl mb-2">✨</div>
+                                <div class="text-xs">Responsive!</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 11: Documentation & Tools -->
+        <div class="slide">
+            <div class="bg-white rounded-2xl shadow-2xl p-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-8">Documentation & Tools</h2>
+
+                <div class="space-y-6">
+                    <div class="bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl p-6">
+                        <h3 class="text-2xl font-bold text-blue-900 mb-4">🔍 Using the Documentation</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <span class="text-blue-600 font-bold mr-3">⌨️</span>
+                                <span><strong>Ctrl + K</strong> on tailwindcss.com for quick search</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-600 font-bold mr-3">📚</span>
+                                <span>Key sections: Core Concepts, Layout, Typography, Backgrounds</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-600 font-bold mr-3">🎮</span>
+                                <span><strong>Tailwind Play:</strong> Online editor (play.tailwindcss.com)</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gradient-to-r from-green-50 to-emerald-50 rounded-xl p-6">
+                        <h3 class="text-2xl font-bold text-green-900 mb-4">🛠️ VS Code Tools</h3>
+                        <div class="grid md:grid-cols-2 gap-4">
+                            <div class="bg-white rounded-lg p-4 border">
+                                <h4 class="font-bold text-blue-700 mb-2">Tailwind CSS IntelliSense</h4>
+                                <p class="text-sm text-gray-600">Smart autocompletion</p>
+                                <code class="text-xs text-gray-500">bradlc.vscode-tailwindcss</code>
+                            </div>
+                            <div class="bg-white rounded-lg p-4 border">
+                                <h4 class="font-bold text-purple-700 mb-2">Prettier Plugin</h4>
+                                <p class="text-sm text-gray-600">Sorts Tailwind classes automatically</p>
+                                <code class="text-xs text-gray-500">prettier-plugin-tailwindcss</code>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Slide 12: Conclusion -->
+        <div class="slide">
+            <div class="bg-white rounded-2xl shadow-2xl p-12">
+                <h2 class="text-4xl font-bold text-gray-900 mb-8">Conclusion & Resources</h2>
+
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div class="bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">📝 Summary</h3>
+                        <ul class="space-y-3 text-gray-700">
+                            <li class="flex items-start">
+                                <span class="text-blue-600 font-bold mr-3">✓</span>
+                                <span>Tailwind is utility-first: styles in HTML</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-600 font-bold mr-3">✓</span>
+                                <span>Consistent, customizable design system</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-600 font-bold mr-3">✓</span>
+                                <span>Responsive by design with breakpoints</span>
+                            </li>
+                            <li class="flex items-start">
+                                <span class="text-blue-600 font-bold mr-3">✓</span>
+                                <span>Perfect for rapid prototyping and maintainable code</span>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-gradient-to-br from-green-50 to-emerald-50 rounded-xl p-6">
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">🚀 Next Steps</h3>
+                        <div class="space-y-4">
+                            <a href="https://tailwindcss.com/docs" target="_blank"
+                                class="block bg-white hover:bg-gray-50 rounded-lg p-4 shadow transition">
+                                <div class="font-bold text-blue-600">📚 Official Documentation</div>
+                                <div class="text-sm text-gray-600">tailwindcss.com/docs</div>
+                            </a>
+                            <a href="https://play.tailwindcss.com" target="_blank"
+                                class="block bg-white hover:bg-gray-50 rounded-lg p-4 shadow transition">
+                                <div class="font-bold text-green-600">🎮 Tailwind Play</div>
+                                <div class="text-sm text-gray-600">Online editor to experiment</div>
+                            </a>
+                            <a href="https://tailwindui.com" target="_blank"
+                                class="block bg-white hover:bg-gray-50 rounded-lg p-4 shadow transition">
+                                <div class="font-bold text-purple-600">💼 Tailwind UI</div>
+                                <div class="text-sm text-gray-600">Premium components</div>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="mt-8 text-center">
+                    <h3 class="text-3xl font-bold text-gray-900 mb-4">Questions?</h3>
+                    <p class="text-xl text-gray-600">Thank you for your attention!</p>
+                    <div class="mt-6">
+                        <button onclick="currentSlide = 1; showSlide(1)"
+                            class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg shadow-lg transition duration-300 text-lg">
+                            Back to start
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentSlide = 1;
+        const totalSlides = 12;
+
+        function showSlide(n) {
+            const slides = document.querySelectorAll('.slide');
+            const navBtns = document.querySelectorAll('.nav-btn');
+
+            if (n > totalSlides) currentSlide = 1;
+            if (n < 1) currentSlide = totalSlides;
+
+            slides.forEach(slide => slide.classList.remove('active'));
+            slides[currentSlide - 1].classList.add('active');
+
+            navBtns.forEach(btn => btn.classList.remove('active'));
+            if (navBtns[currentSlide - 1]) {
+                navBtns[currentSlide - 1].classList.add('active');
+            }
+
+            document.getElementById('currentSlide').textContent = currentSlide;
+            document.getElementById('totalSlides').textContent = totalSlides;
+        }
+
+        function nextSlide() {
+            currentSlide++;
+            showSlide(currentSlide);
+        }
+
+        function prevSlide() {
+            currentSlide--;
+            showSlide(currentSlide);
+        }
+
+        // Keyboard navigation
+        document.addEventListener('keydown', function (e) {
+            if (e.key === 'ArrowRight' || e.key === ' ') {
+                e.preventDefault();
+                nextSlide();
+            }
+            if (e.key === 'ArrowLeft') {
+                e.preventDefault();
+                prevSlide();
+            }
+        });
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function () {
+            document.getElementById('totalSlides').textContent = totalSlides;
+            showSlide(1);
+            // Mark first nav button as active
+            document.querySelectorAll('.nav-btn')[0].classList.add('active');
+        });
+    </script>
+</body>
+
+</html>
